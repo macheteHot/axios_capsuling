@@ -75,14 +75,14 @@ service.interceptors.response.use(
       case 400:
         ErrorMessage('错误请求')
         break
-      case 401:
+      case 401: // auth
         if (res.msg) {
           ErrorMessage(res.msg) // why not auth
         }
         // clean login status (localStorage)
         loginOut()
         setTimeout(() => {
-          // 根据后端返回url 跳转 重新获取code
+          // redirect from api return
           window.location.href = response.data.data.url
         }, 2000)
         break
@@ -173,7 +173,7 @@ function get(url, params) {
 
 /**
  * post methods
- *  * @param {String} url
+ * @param {String} url
  * @param {Object} params
  * only return data ignore msg and code
  */
